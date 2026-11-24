@@ -1,0 +1,82 @@
+# pyproject.toml — the single config file for building, installing, linting and testing pyography.
+# Spec: https://packaging.python.org/en/latest/specifications/pyproject-toml/
+
+[project]
+name = "pyography"
+version = "0.1.0"
+description = "Small, well-tested helpers for coordinates, CRS, geodesic distance and GPS trajectories."
+readme = "README.md"
+authors = [{ name = "Faruk Altun" }]
+license = "MIT"
+license-files = ["LICENSE"]
+# 3.10 reached end of life in Oct 2026; 3.11 is the oldest supported Python (decision D-12).
+requires-python = ">=3.11"
+keywords = ["gis", "geospatial", "crs", "geodesic", "trajectory", "pyproj"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: GIS",
+    "Typing :: Typed",
+]
+# Lower bounds only (no upper caps): a library must not block the apps that install it.
+# The exact versions we tested with are pinned in uv.lock, which is for us, not for users.
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "pyproj>=3.6",
+    "shapely>=2.0",
+    "geopandas>=1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/faltunUW/pyography"
+Source = "https://github.com/faltunUW/pyography"
+Issues = "https://github.com/faltunUW/pyography/issues"
+
+# Tools only developers need. `uv sync` installs this group; `pip install pyography` never does.
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.8",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.7,<0.12.0"]
+build-backend = "uv_build"
+
+# ---------------------------------------------------------------- ruff (lint + format)
+# Docs: https://docs.astral.sh/ruff/rules/
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "E", "W",  # pycodestyle: basic style errors and warnings
+    "F",       # pyflakes: unused imports, undefined names
+    "I",       # isort: sorted imports
+    "B",       # flake8-bugbear: likely bugs (mutable defaults, etc.)
+    "UP",      # pyupgrade: use modern syntax for our minimum Python
+    "D",       # pydocstyle: every public function needs a docstring
+    "NPY",     # NumPy-specific rules (deprecated aliases, legacy random)
+    "RUF",     # ruff's own rules
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]  # test names explain themselves; docstrings there are optional
+
+# ---------------------------------------------------------------- pytest
+# Docs: https://docs.pytest.org/en/stable/reference/customize.html
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-markers", "--strict-config"]
