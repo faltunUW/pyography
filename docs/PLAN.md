@@ -55,6 +55,7 @@ CRS handling, units and error messages. It does **not** invent new geometry or p
 | Q30 | Trajectory output | Frozen `TrajectoryStats` dataclass with unit-suffixed fields and `.to_dict()`. |
 | Q31 | Python versions | Support and test 3.11–3.14 (`requires-python = ">=3.11"`). 3.10 reached end of life in Oct 2026. |
 | Q32 | GeoPandas | A required dependency, not an optional extra. |
+| Q33 | Hands-on learning | Each step adds: predict first, user writes some tests, user runs the commands, a planted bug to find, and an explain-back quiz question. See §5. |
 
 ---
 
@@ -95,8 +96,18 @@ Full verified source list for all 12 projects: `../../_planning/data-sources-ver
 
 ## 5. Implementation steps (learning order)
 
-Each step follows the same loop (settled, Q17–Q19): **Claude builds → the user reads the code and the
-`WALKTHROUGH.md` section → the user asks questions → short interview-style quiz answered in `JOURNAL.md` → next step.**
+Each step follows the same hands-on loop (settled Q17–Q19, extended by Q33 on 2026-11-23):
+
+1. **Predict.** Before Claude builds, the user describes in plain words how they would approach the step.
+2. **Build.** Claude writes the code and the `WALKTHROUGH.md` section, and compares the result with the prediction.
+3. **Write tests.** Claude describes some test cases in English; the user writes them as pytest code.
+4. **Run.** The user runs `uv run pytest` and `uv run ruff check .` in their own terminal.
+5. **Find the bug.** Claude breaks one thing on purpose; the user finds and fixes it with a failing test.
+6. **Quiz.** 3–5 interview-style questions in `JOURNAL.md`, including one "explain this line in your own words";
+   Claude gives feedback.
+7. **Next.** Claude continues only when the user says "next".
+
+Steps without much code (CI, docs site, release) use the parts that fit: predict, run, quiz.
 
 1. **Scaffold.** `uv init --lib`, `pyproject.toml`, `src/pyography/` layout, ruff, pytest, `.gitignore`, MIT license.
    First commit, then create the GitHub repo.

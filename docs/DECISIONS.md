@@ -107,3 +107,11 @@ Questions Q17–Q32 refer to the planning rounds in [`PLAN.md`](PLAN.md).
   re-authored before the first push.
 - **Why:** Commit metadata is public forever, and scrapers collect emails from it. GitHub still credits
   noreply commits to the profile.
+
+### D-19 · A hands-on learning loop for every step (Q33, 2026-11-23)
+- **Decision:** Besides studying and quizzes, each step now has the user predict the approach first, write
+  some of the tests, run the commands themselves, find a planted bug, and explain one key line in their own
+  words.
+- **Why:** Reading good code builds understanding, but not the ability to write it. Writing tests and fixing
+  a real failing test build that skill at low risk, and they fit the 10–15 hour budget.
+- **Changed from:** the original loop, where Claude builds and the user studies and takes a quiz.

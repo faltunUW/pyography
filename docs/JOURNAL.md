@@ -29,6 +29,44 @@ pytest), MIT license, `.gitignore`, a smoke test, and the four docs files. `PLAN
 
 **Study:** [`WALKTHROUGH.md` → Step 1](WALKTHROUGH.md#step-1--scaffold)
 
+### Hands-on: Step 1
+
+Step 1 was built before the hands-on loop existed, so there's no prediction for it. Do these in your own
+terminal, from the `01-pyography` folder.
+
+**A. Run the commands.** Run each one and note what it prints.
+
+```powershell
+uv sync
+uv run pytest
+uv run ruff check .
+uv run ruff format --check .
+```
+
+> *What did you see?*
+
+**B. Break it, read the error, fix it.** Make each change, run the command, read the error, then undo the change.
+
+1. In `src/pyography/__init__.py`, change `version("pyography")` to `version("pyograpy")` (a typo). Run
+   `uv run pytest`. Which exception do you get, and on which line?
+2. In `tests/test_package.py`, swap the order of the two `import` lines. Run `uv run ruff check .`. Which rule
+   code complains? Then run `uv run ruff check . --fix` and see what it does.
+
+> *What did you find?*
+
+**C. Write a test.** Add a second test to `tests/test_package.py`:
+
+> `pyography.__version__` should look like a release number: three whole numbers separated by dots, like `0.1.0`.
+
+Hint: `"0.1.0".split(".")` gives `["0", "1", "0"]`, and `"7".isdigit()` is `True`. Run `uv run pytest` until
+both tests pass. Then commit it yourself:
+
+```powershell
+git add tests/test_package.py
+git commit -m "test: check version format"
+git push
+```
+
 ### Quiz: Step 1
 
 Answer in your own words, below each question. Short answers are fine.
@@ -53,6 +91,15 @@ Answer in your own words, below each question. Short answers are fine.
    > *Your answer:*
 
 5. Someone on Python 3.10 runs `pip install pyography`. What happens, and which line causes it?
+
+   > *Your answer:*
+
+6. **Explain this line in your own words**, as you would to an interviewer. What does each of the three
+   options do, and why would a project want them?
+
+   ```toml
+   addopts = ["-ra", "--strict-markers", "--strict-config"]
+   ```
 
    > *Your answer:*
 
