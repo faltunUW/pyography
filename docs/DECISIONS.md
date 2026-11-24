@@ -101,3 +101,9 @@ Questions Q17–Q32 refer to the planning rounds in [`PLAN.md`](PLAN.md).
   reasoning.
 - **Why:** Being honest up front, plus showing understanding through this file and `JOURNAL.md`, comes across
   better than being asked about it later.
+
+### D-18 · Commit with the GitHub noreply email (step 1, 2026-11-23)
+- **Decision:** This repo's git config uses `<id>+faltunUW@users.noreply.github.com`. The first commit was
+  re-authored before the first push.
+- **Why:** Commit metadata is public forever, and scrapers collect emails from it. GitHub still credits
+  noreply commits to the profile.

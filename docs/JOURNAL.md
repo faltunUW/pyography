@@ -22,6 +22,10 @@ pytest), MIT license, `.gitignore`, a smoke test, and the four docs files. `PLAN
 - Q31 → Python **3.11–3.14**, because 3.10 reached end of life in Oct 2026 (D-12).
 - Q32 → GeoPandas is **required**, not optional (D-13).
 - Dependencies use lower bounds only; `uv.lock` is committed (D-14).
+- Commits use the GitHub noreply email, so no personal email is exposed in public history (D-18).
+
+**Published:** [github.com/faltunUW/pyography](https://github.com/faltunUW/pyography) and the hub
+[github.com/faltunUW/geoai-portfolio](https://github.com/faltunUW/geoai-portfolio), both public.
 
 **Study:** [`WALKTHROUGH.md` → Step 1](WALKTHROUGH.md#step-1--scaffold)
 
